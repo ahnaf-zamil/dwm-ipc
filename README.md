@@ -1,62 +1,37 @@
-# dwm-ipc
-![Main CI](https://github.com/mihirlad55/dwm-ipc/workflows/Main%20CI/badge.svg)
+# Custom DWM-IPC Build
 
-dwm-ipc is a patch for dwm that implements inter-process communication through a
-UNIX socket. This allows you to query the window manager for information, listen
-for events such as tag changes or layout changes, as well as send commands to
-control the window manager from other programs/scripts.
+This is my custom [DWM](dwm.suckless.org/)(IPC) build with custom patches and Polybar support. 
 
+## FAQ
 
-## Requirements
-In order to build dwm you need the Xlib header files. The patch
-additionally requires `yajl` which is a tiny C JSON library.
+- Why did I use IPC? Because I wanted to use Polybar since it's a pain to customize the normal DWM bar.
 
+- Did I change any keybinds? **NO**, I don't change my keybinds. Because I cba to follow tutorials which have a different keybind than me, so I just use the defaults.
 
-## Applying the Patch
-The patch can be found on the
-[Releases page](https://github.com/mihirlad55/dwm-ipc/releases). Download the
-latest version of the patch that matches your version of dwm.
+- What DWM version is this? DWM 6.2 :D
 
-The patch is best applied after all of your other patches due to the number of
-additions to dwm.c. The patch was designed with compatability in mind, so there
-are minimal deletions.
+## Patches Used
 
-### Tips
-- Apply the patch last after all your other patches to avoid merge conflicts
+- [Anybar](https://dwm.suckless.org/patches/anybar/) - Cuz I use Polybar, and not the normal DWM bar
+- [DWM-IPC](https://dwm.suckless.org/patches/ipc/) - Comes with the build, as Polybar needs IPC for DWM
+- [Vanity Gaps](https://dwm.suckless.org/patches/vanitygaps/) - Cuz gaps increase your swag
+- [Autostart](https://dwm.suckless.org/patches/autostart/) - To run scripts after startup (e.g compositor, wallpaper manager, statusbar, etc.)
+- [Tatami](https://dwm.suckless.org/patches/tatami/) - Cuz I don't like the normal layout
 
+## Screenshot
 
-## Patch Compatability
-At the moment, the patch will only work on systems that implement epoll and is
-not completely portable. Portability will be improved in the future.
+Here's how it looks like for me
 
+![Screenshot](https://cdn.discordapp.com/attachments/862906833273094167/961970119741939712/unknown.png)
 
-## Supported IPC Messages
-At the moment the IPC patch supports the following message requests:
-- Run user-defined command (similar to key bindings)
+**P.S:** Mine might look different because I am also using Picom, Dmenu, Polybar, Spicetify, and Alacritty alongside DWM
 
-- Get information about available layouts
+## Installing
 
-- Get information about the tags available
+If the [DWM IPC](https://github.com/mihirlad55/dwm-ipc) build has any requirements, install those first. Then follow my install steps
+```bash
+git clone https://github.com/ahnaf-zamil/dwm-ipc
+cd dwm
+sudo make clean install
+```
 
-- Get the properties of all of the monitors
-
-- Get the properties of a specific dwm client
-
-- Subscribe to tag change, client focus change, layout change events, monitor
-focus change events, and focused title change events.
-
-For more info on the IPC protocol implementation, visit the
-[wiki](https://github.com/mihirlad55/dwm-ipc/wiki/).
-
-
-## dwm-msg
-`dwm-msg` is a cli program included in the patch which supports all of the IPC
-message types listed above. The program can be used to run commands, query dwm
-for information, and listen for events. This program is particularly useful for
-creating custom shell scripts to control dwm.
-
-
-## Related Projects
-See [dwmipcpp](https://github.com/mihirlad55/dwmipcpp)
-
-See [polybar dwm module \[WIP\]](https://github.com/mihirlad55/polybar)
